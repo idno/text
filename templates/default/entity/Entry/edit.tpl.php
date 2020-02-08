@@ -21,6 +21,18 @@ if (!empty($vars['object'])) {
     /* @var \Idno\Core\Template $this */
 
 ?>
+<?php
+if (!empty($vars['object']->inreplyto)) {
+    if (!is_array($vars['object']->inreplyto)) {
+        $vars['object']->inreplyto = array($vars['object']->inreplyto);
+    }
+} else {
+    $vars['object']->inreplyto = array();
+}
+if (!empty($vars['url'])) {
+    $vars['object']->inreplyto = array($vars['url']);
+}
+?>
     <form action="<?php echo $vars['object']->getURL() ?>" method="post">
 
         <div class="row">
@@ -60,6 +72,68 @@ if (!empty($vars['object'])) {
                     'required' => true
                 ])->draw('forms/input/richtext')?>
                 <?php echo $this->draw('entity/tags/input'); ?>
+                    <?php echo $this->draw('content/unfurl');
+
+            // Set focus so you can start typing straight away (on shares)
+            if (\Idno\Core\Idno::site()->currentPage()->getInput('share_url')) {
+                ?>
+            <script>
+                $(document).ready(function(){
+/*
+                    var content = $('#body').val();
+                    var len = content.length;
+                    var element = $('#body');
+                    $('#body').focus(function(){
+                        $(this).prop('selectionStart', len);
+                    });
+                    $('#body').focus();
+ */
+                    var content = $('#title').val();
+                    var len = content.length;
+                    var element = $('#title');
+                    $('#title').focus(function(){
+                        $(this).prop('selectionStart', len);
+                    });
+                    $('#title').focus();
+
+/*                    var element = $('#title');
+                    var content = element.val(); // Status #body
+                    var len = content.length;
+                    element.focus(function(){
+                        $(this).prop('selectionStart', len);
+                    });
+                    element.focus();*/
+                });
+            </script>
+                <?php
+            }
+            ?>
+
+            <p>
+                <small><a id="inreplyto-add" href="#"
+                          onclick="$('#inreplyto').append('<span><input required type=&quot;url&quot; name=&quot;inreplyto[]&quot; value=&quot;&quot; placeholder=&quot;Add the URL that you\'re replying to&quot; class=&quot;form-control&quot; onchange=&quot;adjust_content(this.value)&quot; /> <small><a href=&quot;#&quot; onclick=&quot;$(this).parent().parent().remove(); return false;&quot;><icon class=&quot;fa fa-times&quot;></icon> Remove URL</a></small><br /></span>'); return false;"><i class="fa fa-reply"></i>
+                        <?php echo \Idno\Core\Idno::site()->language()->_('Reply to a site'); ?></a></small>
+            </p>
+
+
+            <div id="inreplyto">
+                <?php
+                if (!empty($vars['object']->inreplyto)) {
+                    foreach ($vars['object']->inreplyto as $inreplyto) {
+                        ?>
+                            <p>
+                                <input type="url" name="inreplyto[]"
+                                       placeholder="Add the URL that you're replying to"
+                                       class="form-control inreplyto" value="<?php echo htmlspecialchars($inreplyto) ?>" onchange="adjust_content(this.value)"/>
+                                <small><a href="#"
+                                          onclick="$(this).parent().parent().remove(); return false;"><i class="fa fa-times"></i>
+                                      <?php echo \Idno\Core\Idno::site()->language()->_('Remove URL'); ?></a></small>
+                            </p>
+                        <?php
+                    }
+                }
+                ?>
+                </div>
 
                 <?php echo $this->drawSyndication('article', $vars['object']->getPosseLinks()); ?>
                 <?php if (empty($vars['object']->_id)) {

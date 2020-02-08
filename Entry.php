@@ -16,6 +16,18 @@ namespace IdnoPlugins\Text {
 
         function getDescription()
         {
+            $body = $this->body;
+            if (!empty($this->inreplyto)) {
+                if (is_array($this->inreplyto)) {
+                    foreach ($this->inreplyto as $inreplyto) {
+                        $body = '<a href="' . $inreplyto . '" class="u-in-reply-to"></a>' . $body;
+                    }
+                } else {
+                    $body = '<a href="' . $this->inreplyto . '" class="u-in-reply-to"></a>' . $body;
+                }
+            }
+            return $body;
+
             if (!empty($this->body)) return $this->body;
 
             return '';
@@ -52,7 +64,12 @@ namespace IdnoPlugins\Text {
 
         function getMetadataForFeed()
         {
-            return array('type' => 'entry');
+            $meta = array('type' => 'entry');
+            if ($this->inreplyto) {
+                $meta['in-reply-to'] = $this->inreplyto;
+            //    $meta['type'] = 'reply';
+            }
+            return $meta;
         }
 
         /**
@@ -85,6 +102,21 @@ namespace IdnoPlugins\Text {
 
                 $this->body  = $body;
                 $this->title = \Idno\Core\Idno::site()->currentPage()->getInput('title');
+
+                $inreplyto = \Idno\Core\Idno::site()->currentPage()->getInput('inreplyto');
+                $this->inreplyto = $inreplyto;
+
+                // TODO fetch syndicated reply targets asynchronously (or maybe on-demand, when syndicating?)
+                if (!empty($inreplyto)) {
+                    if (is_array($inreplyto)) {
+                        foreach ($inreplyto as $inreplytourl) {
+                            $this->syndicatedto = \Idno\Core\Webmention::addSyndicatedReplyTargets($inreplytourl, $this->syndicatedto);
+                        }
+                    } else {
+                        $this->syndicatedto = \Idno\Core\Webmention::addSyndicatedReplyTargets($inreplyto);
+                    }
+                }
+
                 $this->tags  = \Idno\Core\Idno::site()->currentPage()->getInput('tags');
                 $access      = \Idno\Core\Idno::site()->currentPage()->getInput('access');
                 $this->setAccess($access);
