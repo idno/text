@@ -1,32 +1,40 @@
-#: ./Entry.php:116
-msgid "You can\'t save an empty entry."
+#: ./Entry.php:124
+msgid "You can't save an empty entry."
 msgstr ""
 
-#: ./templates/default/entity/Entry/edit.tpl.php:36
+#: ./templates/default/entity/Entry/edit.tpl.php:41
 msgid "New Post"
 msgstr ""
 
-#: ./templates/default/entity/Entry/edit.tpl.php:42
+#: ./templates/default/entity/Entry/edit.tpl.php:47
 msgid "Edit Post"
 msgstr ""
 
-#: ./templates/default/entity/Entry/edit.tpl.php:50
+#: ./templates/default/entity/Entry/edit.tpl.php:55
 msgid "Title"
 msgstr ""
 
-#: ./templates/default/entity/Entry/edit.tpl.php:51
+#: ./templates/default/entity/Entry/edit.tpl.php:56
 msgid "Give it a title"
 msgstr ""
 
-#: ./templates/default/entity/Entry/edit.tpl.php:75
+#: ./templates/default/entity/Entry/edit.tpl.php:60
+msgid "Subtitle"
+msgstr ""
+
+#: ./templates/default/entity/Entry/edit.tpl.php:61
+msgid "Optional sub title for this post"
+msgstr ""
+
+#: ./templates/default/entity/Entry/edit.tpl.php:86
 msgid "Cancel"
 msgstr ""
 
-#: ./templates/default/entity/Entry/edit.tpl.php:76
+#: ./templates/default/entity/Entry/edit.tpl.php:87
 msgid "Publish"
 msgstr ""
 
-#: ./templates/default/entity/Entry.tpl.php:33
+#: ./templates/default/entity/Entry.tpl.php:39
 msgid "%d min read"
 msgstr ""
 
