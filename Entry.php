@@ -20,13 +20,6 @@ namespace IdnoPlugins\Text {
 
             return '';
         }
-        
-        function getShortDescription() {
-            
-            if (!empty($this->subtitle)) return $this->subtitle;
-            
-            return '';
-        }
 
         function getURL()
         {
@@ -92,7 +85,7 @@ namespace IdnoPlugins\Text {
 
                 $this->body  = $body;
                 $this->title = \Idno\Core\Idno::site()->currentPage()->getInput('title');
-                $this->subtitle = \Idno\Core\Idno::site()->currentPage()->getInput('subtitle');
+                $this->short_description = \Idno\Core\Idno::site()->currentPage()->getInput('subtitle');
                 $this->tags  = \Idno\Core\Idno::site()->currentPage()->getInput('tags');
                 $access      = \Idno\Core\Idno::site()->currentPage()->getInput('access');
                 $this->setAccess($access);
