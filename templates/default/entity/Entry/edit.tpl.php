@@ -11,8 +11,8 @@ if (!empty($vars['object']->title)) {
 } else {
     $title = '';
 }
-if (!empty($vars['object']->subtitle)) {
-    $subtitle = $vars['object']->subtitle;
+if (!empty($vars['object']->short_description)) {
+    $subtitle = $vars['object']->short_description;
 } else {
     $subtitle = '';
 }
