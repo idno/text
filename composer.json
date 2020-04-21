@@ -2,7 +2,7 @@
     "name": "idno/text",
     "description": "A lightweight blogging engine.",
     "type": "known-plugin",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "require": {
         "composer/installers": "~1.0"
     },
