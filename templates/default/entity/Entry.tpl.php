@@ -22,7 +22,7 @@ if (empty($vars['feed_view'])) {
 
         <?php if (!empty($vars['object']->getShortDescription())) { ?>
         <h3 class="p-summary"><a
-                href="<?php echo $vars['object']->getDisplayURL() ?>"><?php echo htmlentities(strip_tags($vars['object']->getShortDescription()), ENT_QUOTES, 'UTF-8'); ?></a>
+                href="<?php echo $vars['object']->getDisplayURL() ?>"><?php echo htmlentities(strip_tags($vars['object']->short_description), ENT_QUOTES, 'UTF-8'); ?></a>
         </h3>
         <?php } ?>
     <?php
