@@ -61,7 +61,8 @@ namespace IdnoPlugins\Text {
          */
         function getIcon()
         {
-            $doc = @\DOMDocument::loadHTML($this->getDescription());
+            $doc = new \DOMDocument();
+	        $doc->loadHTML( $this->getDescription() );
             if ($doc) {
                 $xpath = new \DOMXPath($doc);
                 $src   = $xpath->evaluate("string(//img/@src)");
