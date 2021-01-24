@@ -67,6 +67,12 @@ if (!empty($vars['url'])) {
                     <label for="title"><?php echo \Idno\Core\Idno::site()->language()->_('Title'); ?></label>
                     <?php echo $this->__(['name' => 'title', 'placeholder' => \Idno\Core\Idno::site()->language()->_('Give it a title'), 'id' => 'title', 'value' => $title, 'required' => true, 'class' => 'form-control'])->draw('forms/input/input'); ?>
                 </div>
+                        
+                <div class="content-form">
+                    <label for="subtitle"><?php echo \Idno\Core\Idno::site()->language()->_('Subtitle'); ?></label>
+                    <?php echo $this->__(['name' => 'subtitle', 'placeholder' => \Idno\Core\Idno::site()->language()->_('Optional sub title for this post'), 'id' => 'subtitle', 'value' => $subtitle, 'class' => 'form-control'])->draw('forms/input/input'); ?>
+                </div>
+
 
                 <div class="content-form">
                     <label for="subtitle"><?php echo \Idno\Core\Idno::site()->language()->_('Subtitle'); ?></label>
