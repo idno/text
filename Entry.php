@@ -18,12 +18,14 @@ namespace IdnoPlugins\Text {
         {
             $body = $this->body;
             if (!empty($this->inreplyto)) {
+                $anchor = '<a href="';
+                $anchor_class = '" class="u-in-reply-to"></a>';
                 if (is_array($this->inreplyto)) {
                     foreach ($this->inreplyto as $inreplyto) {
-                        $body = '<a href="' . $inreplyto . '" class="u-in-reply-to"></a>' . $body;
+                        $body = $anchor . $inreplyto . $anchor_class . $body;
                     }
                 } else {
-                    $body = '<a href="' . $this->inreplyto . '" class="u-in-reply-to"></a>' . $body;
+                    $body = $anchor . $this->inreplyto . $anchor_class . $body;
                 }
             }
             return $body;
@@ -67,7 +69,6 @@ namespace IdnoPlugins\Text {
             $meta = array('type' => 'entry');
             if ($this->inreplyto) {
                 $meta['in-reply-to'] = $this->inreplyto;
-            //    $meta['type'] = 'reply';
             }
             return $meta;
         }
@@ -78,7 +79,8 @@ namespace IdnoPlugins\Text {
          */
         function getIcon()
         {
-            $doc = @\DOMDocument::loadHTML($this->getDescription());
+            $doc = new \DOMDocument();
+               $doc->loadHTML( $this->getDescription() );
             if ($doc) {
                 $xpath = new \DOMXPath($doc);
                 $src   = $xpath->evaluate("string(//img/@src)");
@@ -102,6 +104,7 @@ namespace IdnoPlugins\Text {
 
                 $this->body  = $body;
                 $this->title = \Idno\Core\Idno::site()->currentPage()->getInput('title');
+                $this->short_description = \Idno\Core\Idno::site()->currentPage()->getInput('subtitle');
 
                 $inreplyto = \Idno\Core\Idno::site()->currentPage()->getInput('inreplyto');
                 $this->inreplyto = $inreplyto;
@@ -171,7 +174,8 @@ namespace IdnoPlugins\Text {
                     "name" => $this->getOwner()->getName()
                 ],
                 'headline' => $this->getTitle(),
-                'description' => $this->body,
+                'description' => $this->getShortDescription(),
+                'text' => $this->body,
                 'url' => $this->getUrl(),
                 'image' => $this->getIcon()
             ];

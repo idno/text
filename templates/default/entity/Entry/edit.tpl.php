@@ -79,15 +79,6 @@ if (!empty($vars['url'])) {
                 ?>
             <script>
                 $(document).ready(function(){
-/*
-                    var content = $('#body').val();
-                    var len = content.length;
-                    var element = $('#body');
-                    $('#body').focus(function(){
-                        $(this).prop('selectionStart', len);
-                    });
-                    $('#body').focus();
- */
                     var content = $('#title').val();
                     var len = content.length;
                     var element = $('#title');
@@ -95,14 +86,6 @@ if (!empty($vars['url'])) {
                         $(this).prop('selectionStart', len);
                     });
                     $('#title').focus();
-
-/*                    var element = $('#title');
-                    var content = element.val(); // Status #body
-                    var len = content.length;
-                    element.focus(function(){
-                        $(this).prop('selectionStart', len);
-                    });
-                    element.focus();*/
                 });
             </script>
                 <?php
