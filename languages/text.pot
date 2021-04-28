@@ -38,27 +38,23 @@ msgstr ""
 msgid "%d min read"
 msgstr ""
 
-#: ./Pages/Delete.php:27
-msgid "Delete %s"
+#: ./templates/default/entity/Entry/edit.tpl.php:107
+msgid "Remove URL"
 msgstr ""
 
-#: ./Pages/Delete.php:41
-msgid "You don't have permission to perform this task."
+#: ./templates/default/entity/Entry/edit.tpl.php:108
+msgid "Reply to a site"
 msgstr ""
 
-#: ./Pages/Delete.php:46
-msgid "%s was deleted."
+#: ./templates/default/entity/Entry/edit.tpl.php:142
+msgid "Cancel"
 msgstr ""
 
-#: ./Pages/Delete.php:48
-msgid "We couldn't delete %s."
+#: ./templates/default/entity/Entry/edit.tpl.php:143
+msgid "Publish"
 msgstr ""
 
-#: ./Pages/Edit.php:42
-msgid "Write an entry"
-msgstr ""
-
-#: ./Pages/Edit.php:44
-msgid "Edit entry"
+#: ./Entry.php:151
+msgid "You can't save an empty entry."
 msgstr ""
 

@@ -16,6 +16,20 @@ namespace IdnoPlugins\Text {
 
         function getDescription()
         {
+            $body = $this->body;
+            if (!empty($this->inreplyto)) {
+                $anchor = '<a href="';
+                $anchor_class = '" class="u-in-reply-to"></a>';
+                if (is_array($this->inreplyto)) {
+                    foreach ($this->inreplyto as $inreplyto) {
+                        $body = $anchor . $inreplyto . $anchor_class . $body;
+                    }
+                } else {
+                    $body = $anchor . $this->inreplyto . $anchor_class . $body;
+                }
+            }
+            return $body;
+
             if (!empty($this->body)) return $this->body;
 
             return '';
@@ -52,7 +66,11 @@ namespace IdnoPlugins\Text {
 
         function getMetadataForFeed()
         {
-            return array('type' => 'entry');
+            $meta = array('type' => 'entry');
+            if ($this->inreplyto) {
+                $meta['in-reply-to'] = $this->inreplyto;
+            }
+            return $meta;
         }
 
         /**
@@ -87,6 +105,21 @@ namespace IdnoPlugins\Text {
                 $this->body  = $body;
                 $this->title = \Idno\Core\Idno::site()->currentPage()->getInput('title');
                 $this->short_description = \Idno\Core\Idno::site()->currentPage()->getInput('subtitle');
+
+                $inreplyto = \Idno\Core\Idno::site()->currentPage()->getInput('inreplyto');
+                $this->inreplyto = $inreplyto;
+
+                // TODO fetch syndicated reply targets asynchronously (or maybe on-demand, when syndicating?)
+                if (!empty($inreplyto)) {
+                    if (is_array($inreplyto)) {
+                        foreach ($inreplyto as $inreplytourl) {
+                            $this->syndicatedto = \Idno\Core\Webmention::addSyndicatedReplyTargets($inreplytourl, $this->syndicatedto);
+                        }
+                    } else {
+                        $this->syndicatedto = \Idno\Core\Webmention::addSyndicatedReplyTargets($inreplyto);
+                    }
+                }
+
                 $this->tags  = \Idno\Core\Idno::site()->currentPage()->getInput('tags');
                 $access      = \Idno\Core\Idno::site()->currentPage()->getInput('access');
                 $this->setAccess($access);
