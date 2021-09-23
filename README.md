@@ -14,6 +14,11 @@ A Known plugin that allows post status updates with a light-weight _blogging eng
 * Make your changes and test them.
 * Update languages file `npm run grunt build-lang`
 * Update the version number in `composer.json`
+* Beautify your php `
+
+```
+vendor/squizlabs/php_codesniffer/bin/phpcbf --standard=vendor/mapkyca/known-phpcs/configuration.xml --extensions=php .
+```
 
 ## License
 
