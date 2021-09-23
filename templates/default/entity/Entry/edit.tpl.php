@@ -73,12 +73,6 @@ if (!empty($vars['url'])) {
                     <?php echo $this->__(['name' => 'subtitle', 'placeholder' => \Idno\Core\Idno::site()->language()->_('Optional sub title for this post'), 'id' => 'subtitle', 'value' => $subtitle, 'class' => 'form-control'])->draw('forms/input/input'); ?>
                 </div>
 
-
-                <div class="content-form">
-                    <label for="subtitle"><?php echo \Idno\Core\Idno::site()->language()->_('Subtitle'); ?></label>
-                    <?php echo $this->__(['name' => 'subtitle', 'placeholder' => \Idno\Core\Idno::site()->language()->_('Optional sub title for this post'), 'id' => 'subtitle', 'value' => $subtitle, 'class' => 'form-control'])->draw('forms/input/input'); ?>
-                </div>
-
                 <?php echo $this->__([
                     'name' => 'body',
                     'unique_id' => $unique_id,
@@ -90,9 +84,9 @@ if (!empty($vars['url'])) {
                 <?php echo $this->draw('entity/tags/input'); ?>
                     <?php echo $this->draw('content/unfurl');
 
-            // Set focus so you can start typing straight away (on shares)
-            if (\Idno\Core\Idno::site()->currentPage()->getInput('share_url')) {
-                ?>
+                    // Set focus so you can start typing straight away (on shares)
+                    if (\Idno\Core\Idno::site()->currentPage()->getInput('share_url')) {
+                        ?>
             <script>
                 $(document).ready(function(){
                     var content = $('#title').val();
@@ -104,9 +98,9 @@ if (!empty($vars['url'])) {
                     $('#title').focus();
                 });
             </script>
-                <?php
-            }
-            ?>
+                        <?php
+                    }
+                    ?>
 
             <p>
                 <small><a id="inreplyto-add" href="#"
