@@ -80,12 +80,14 @@ namespace IdnoPlugins\Text {
         function getIcon()
         {
             $doc = new \DOMDocument();
-            $doc->loadHTML($this->getDescription());
-            if ($doc) {
-                $xpath = new \DOMXPath($doc);
-                $src   = $xpath->evaluate("string(//img/@src)");
-                if (!empty($src)) {
-                    return $src;
+            if (!empty($this->getDescription())) {
+                $doc->loadHTML($this->getDescription());
+                if ($doc) {
+                    $xpath = new \DOMXPath($doc);
+                    $src   = $xpath->evaluate("string(//img/@src)");
+                    if (!empty($src)) {
+                        return $src;
+                    }
                 }
             }
             return parent::getIcon();
